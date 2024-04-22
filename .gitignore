@@ -1,0 +1,33 @@
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+# Docker
+docker/db/data
+
+# Environment
+.env
+!.env.sample
+*.env.local
+*.env.dev
+*.env.prod
+
+# Logs
+*.log
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###

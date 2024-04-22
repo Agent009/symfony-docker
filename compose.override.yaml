@@ -1,6 +1,8 @@
 # Development environment override
 services:
   php:
+    env_file:
+      - .env
     build:
       context: .
       target: frankenphp_dev
@@ -22,3 +24,9 @@ services:
 
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+
+###> doctrine/doctrine-bundle ###
+  database:
+    ports:
+      - "5432"
+###< doctrine/doctrine-bundle ###

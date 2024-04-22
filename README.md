@@ -12,6 +12,7 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 3. Run `docker compose up --pull always -d --wait` to start the project
 4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+6. Fix permissions for local user: `sudo setfacl -Rm u:USER_NAME:rwX,g:USER_GROUP:rwX,d:g:USER_GROUP:rwX /path/to/dir`
 
 ## Features
 
