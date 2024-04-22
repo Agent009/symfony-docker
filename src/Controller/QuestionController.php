@@ -1,4 +1,5 @@
 <?php
+namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;

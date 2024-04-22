@@ -1,6 +1,7 @@
 <?php
 
-use Psr\Container\ContainerInterface;
+namespace App\Controller;
+
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
