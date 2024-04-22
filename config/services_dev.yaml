@@ -1,0 +1,6 @@
+# config/services_dev.yaml
+services:
+    # https://symfony.com/doc/5.x/profiler.html#enabling-the-profiler-conditionally
+    # In order for the profiler to be injected into your controller you need to create an alias pointing to the 
+    # existing profiler service:
+    Symfony\Component\HttpKernel\Profiler\Profiler: '@profiler'
