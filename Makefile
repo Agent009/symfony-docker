@@ -1,3 +1,13 @@
+# @$(eval c ?=)
+# @: Suppresses the command from being echoed in the output when it's executed.
+# $(eval ...): GNU Make function that evaluates the expression inside it and assigns its result to the defined variable.
+# 	?= 		Conditional variable assignment operator. "Assign the value if the variable is not already set".
+#		? 	Built-in variable in Make that represents the first word of the command line. In this context, c is assigned
+# 			the value of the first word of the command line if it's not already set.
+#			This allows you to pass additional parameters to the composer target.
+# @$(COMPOSER) $(c): Executes the Composer command. $(c) is the value assigned to c in the previous line, which could be
+#	additional parameters or flags passed to Composer.
+
 # Executables (local)
 DOCKER_COMP = docker compose
 
@@ -21,8 +31,35 @@ help: ## Outputs this help screen
 build: ## Builds the Docker images
 	@$(DOCKER_COMP) build --pull --no-cache
 
-up: ## Start the docker hub in detached mode (no logs)
-	@$(DOCKER_COMP) up --detach
+up: create_env_file do-up ## Start the docker hub in detached mode (no logs)
+
+do-up:
+	@$(eval env ?= prod)
+	@if [ "$(env)" = "prod" ]; \
+	then \
+    	$(DOCKER_COMP) -f compose.prod.yaml --env-file ./.env --env-file ./.env.$(env) --env-file ./.env.$(env).local --env-file ./.env.local up --detach; \
+    else \
+    	$(DOCKER_COMP) --env-file ./.env --env-file ./.env.$(env) --env-file ./.env.$(env).local --env-file ./.env.local up --detach; \
+    fi
+
+create_env_file:
+	@$(eval env ?= prod)
+	@if [ ! -f ./.env ]; then \
+		@touch ./.env; \
+		echo "Created .env"; \
+	fi;
+	@if [ ! -f ./.env.local ]; then \
+		@touch ./.env.local; \
+		echo "Created .env.local"; \
+	fi;
+	@if [ ! -f ./.env.$(env) ]; then \
+		@touch ./.env.$(env); \
+		echo "Created .env.$(env)"; \
+	fi;
+	@if [ ! -f ./.env.$(env).local ]; then \
+		@touch ./.env.$(env); \
+		echo "Created .env.$(env).local"; \
+	fi;
 
 start: build up ## Build and start the containers
 
