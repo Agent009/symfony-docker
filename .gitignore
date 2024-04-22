@@ -13,11 +13,7 @@
 docker/db/data
 
 # Environment
-.env
-!.env.sample
-*.env.local
-*.env.dev
-*.env.prod
+
 
 # Logs
 *.log

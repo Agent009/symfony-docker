@@ -1,8 +1,6 @@
 # Development environment override
 services:
   php:
-    env_file:
-      - .env
     build:
       context: .
       target: frankenphp_dev
