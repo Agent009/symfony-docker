@@ -25,6 +25,9 @@ class QuestionController extends BaseController
      */
     public function show($slug) : Response
     {
+        //dump($slug, $this);
+        //dd($slug, $this);
+        //$this->logger->info("Showing question $slug");
         $answers = [
             'Make sure your cat is sitting purrrfectly still ?',
             'Honestly, I like furry shoes better than MY cat',

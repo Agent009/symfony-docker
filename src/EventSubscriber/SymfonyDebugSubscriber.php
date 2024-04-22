@@ -4,22 +4,24 @@ namespace App\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\KernelInterface;
 
-class SymfonyDebugSubscriber implements EventSubscriberInterface
+readonly class SymfonyDebugSubscriber implements EventSubscriberInterface
 {
+    public function __construct(private KernelInterface $kernel)
+    {
+    }
+
     public static function getSubscribedEvents(): array
     {
-        // return the subscribed events, their methods and priorities
         return [
-            KernelEvents::EXCEPTION => [
-                ['onKernelResponse', 0],
-            ],
+            KernelEvents::EXCEPTION => 'onKernelResponse',
         ];
     }
 
     // ...
 
-    public function onKernelResponse(ResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event) : void
     {
         if (!$this->kernel->isDebug()) {
             return;
